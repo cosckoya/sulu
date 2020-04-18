@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  nginx:
+    container_name: nginx
+    image: nginx:sulu
+    build:
+      context: docker/nginx
+    ports:
+      - 80:80
+    volumes:
+      - project_data:/var/www/project:ro
+    links:
+      - php
+    depends_on:
+      - php
+
+  php:
+    container_name: php-fpm    
+    image: php-fpm:sulu
+    build:
+      context: docker/php
+      args:
+        USER_ID: 1000
+    environment:
+      PHP_TIMEZONE: Europe/Madrid
+      PHP_MEMORY_LIMIT: -1
+      DATABASE_URL: 'mysql://user:password@mysql:3306/sulu'
+    volumes:
+      - project_data:/var/www/project:cached
+    ports:
+      - 9000
+    links:
+      - mysql
+    depends_on:
+      - mysql
+ 
+  mysql:
+    container_name: mysql    
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: sulu
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - 3306
+
+volumes:
+    project_data:
+      driver_opts:
+        o: uid=1000,gid=1000      
