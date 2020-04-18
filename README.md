@@ -11,7 +11,6 @@ By Cosckoya
 - https://docs.sulu.io/
 - https://github.com/sulu
 - https://github.com/sulu/skeleton
-- http://docs.sulu.io/en/latest/book/getting-started.html
 
 # Tools
 - Docker
@@ -33,9 +32,8 @@ CMD> docker-compose exec php bash
 ```
 · Create Sulu Project
 ``` shell
-PHP_CONTAINER_CMD> composer create-project sulu/skeleton /tmp/project
-PHP_CONTAINER_CMD> cp -RT /tmp/project . && rm -rf /tmp/project/
-PHP_CONTAINER_CMD> bin/adminconsole sulu:build dev --destroy
+PHP_CONTAINER_CMD> composer create-project sulu/skeleton .
+PHP_CONTAINER_CMD> bin/adminconsole sulu:build dev
 PHP_CONTAINER_CMD> chown -R www-data:www-data /var/www/project
 ```
 · GOTO
