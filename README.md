@@ -34,7 +34,7 @@ CMD> docker-compose exec php bash
 ``` shell
 PHP_CONTAINER_CMD> composer create-project sulu/skeleton .
 PHP_CONTAINER_CMD> bin/adminconsole sulu:build dev
-PHP_CONTAINER_CMD> chown -R www-data:www-data /var/www/project
+PHP_CONTAINER_CMD> chown -R www-data:www-data /var/www
 ```
 · GOTO
 ```
